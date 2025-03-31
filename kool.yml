@@ -16,6 +16,6 @@ scripts:
     - kool run composer install
     - kool run artisan migrate:fresh --seed
   before-start:
-    - cp .env.example .env
+    - rsync .env.example .env
   # CLI access to MariaDB
   maria: kool exec -e MYSQL_PWD=$DB_PASSWORD database mariadb -u $DB_USERNAME $DB_DATABASE
