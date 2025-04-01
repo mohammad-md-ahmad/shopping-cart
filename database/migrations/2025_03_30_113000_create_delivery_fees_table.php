@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('delivery_fees', function (Blueprint $table) {
             $table->id();
-            $table->decimal('value');
-            $table->boolean('is_active')->default(0);
+            $table->unsignedInteger('fee');
+            $table->unsignedInteger('min_amount');
+            $table->unsignedInteger('max_amount')->nullable();
             $table->timestamps();
         });
     }

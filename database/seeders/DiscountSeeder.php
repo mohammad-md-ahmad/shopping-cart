@@ -28,12 +28,23 @@ class DiscountSeeder extends Seeder
                     'valid_from' => Carbon::now()->toDateString(),
                     'valid_until' => null,
                 ],
+                [
+                    'type' => DiscountType::PERCENTAGE->name,
+                    'value' => 20,
+                    'min_quantity' => 1,
+                    'applicable_model_type' => Product::class,
+                    'applicable_model_id' => DB::table('products')->where('id', 2)->first()?->id,
+                    'valid_from' => Carbon::now()->toDateString(),
+                    'valid_until' => null,
+                ],
             ];
 
             foreach ($discounts as $discount) {
                 DB::table('discounts')->updateOrInsert(
                     [
                         'type' => $discount['type'],
+                        'value' => $discount['value'],
+                        'min_quantity' => $discount['min_quantity'],
                         'applicable_model_type' => $discount['applicable_model_type'],
                         'applicable_model_id' => $discount['applicable_model_id'],
                         'valid_from' => $discount['valid_from'],

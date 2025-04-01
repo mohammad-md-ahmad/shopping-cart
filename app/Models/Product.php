@@ -1,19 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Product extends Model
-{
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'name',
-        'code',
-        'price',
-    ];
-}
+/**
+ * @property string $id
+ * @property string $name
+ * @property string $code
+ * @property int $price
+ */
+class Product extends BaseModel {}

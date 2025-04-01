@@ -1,23 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Discount extends Model
-{
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'type',
-        'value',
-        'min_quantity',
-        'applicable_model_type',
-        'applicable_model_id',
-        'valid_from',
-        'valid_until',
-    ];
-}
+/**
+ * @property string $id
+ * @property string $type
+ * @property int $value
+ * @property int $min_quantity
+ * @property string $applicable_model_type
+ * @property string $applicable_model_id
+ * @property string $valid_from
+ * @property string $valid_until
+ */
+class Discount extends BaseModel {}

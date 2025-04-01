@@ -1,18 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class DeliveryFee extends Model
-{
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'type',
-        'is_active',
-    ];
-}
+/**
+ * @property int $id
+ * @property int $fee
+ * @property int $min_amount
+ * @property int $max_amount
+ */
+class DeliveryFee extends BaseModel {}

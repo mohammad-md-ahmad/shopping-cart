@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('cart_id')->constrained()->onDelete('cascade');
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->unique(['cart_id', 'product_id', 'is_free']);
+            $table->unique(['cart_id', 'product_id']);
             $table->integer('quantity');
-            $table->bigInteger('price_at_time');
-            $table->boolean('is_free')->default(0);
+            $table->unsignedInteger('price_at_time');
             $table->timestamps();
         });
     }
