@@ -34,7 +34,7 @@ class PercentageDiscountService implements DiscountStrategyInterface
     {
         try {
             return [
-                'discount' => (int) $this->cartItem->price_at_time * ($this->discount->value / 100),
+                'discount' => (int) ($this->cartItem->price_at_time * ($this->discount->value / 100)),
             ];
         } catch (Exception $e) {
             throw $e;

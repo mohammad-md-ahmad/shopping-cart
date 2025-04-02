@@ -152,11 +152,15 @@ class CartService implements CartServiceInterface
                     $query->where('max_amount', '>=', $totalCost)
                         ->orWhereNull('max_amount');
                 })
-                ->firstOrFail();
+                ->first();
 
-            $deliveryFee = new DeliveryFee($deliveryFeeData);
+            if ($deliveryFeeData) {
+                $deliveryFee = new DeliveryFee($deliveryFeeData);
 
-            return $deliveryFee->fee;
+                return $deliveryFee->fee;
+            }
+
+            return 0;
         } catch (Exception $e) {
             throw $e;
         }
