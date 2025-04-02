@@ -1,0 +1,8 @@
+parameters:
+  level: 5
+  treatPhpDocTypesAsCertain: false
+  paths:
+    - app
+  ignoreErrors:
+    - '#Dead catch \- Exception is never thrown in the try block\.#'
+

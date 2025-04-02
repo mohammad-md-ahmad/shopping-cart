@@ -8,7 +8,7 @@ scripts:
   artisan: kool exec app php artisan
   phpunit: kool exec app php ./vendor/bin/phpunit
   pint: kool exec app php ./vendor/bin/pint
-  phpstan: kool exec app php ./vendor/bin/phpstan analyze -l 5 app
+  phpstan: kool exec app php ./vendor/bin/phpstan analyze -c phpstan.neon
   setup:
     - kool run before-start
     - kool start
