@@ -14,6 +14,7 @@ scripts:
     - kool start
     - kool run composer install
     - kool run artisan key:generate
+    - kool run artisan migrate:fresh --seed
   reset:
     - kool run composer install
     - kool run artisan migrate:fresh --seed
