@@ -1,66 +1,147 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Project Setup Instructions
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 1. Install Kool.dev
 
-## About Laravel
+[Kool.dev](https://kool.dev) is a tool that simplifies local development by managing Docker containers, allowing for quick setup and management of your development environment.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+To install Kool.dev, follow the instructions on their official [installation guide](https://kool.dev/docs/installation).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 2. Run Setup Command
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Once Kool.dev is installed, navigate to the root directory of this project and run the following command to set up the environment:
 
-## Learning Laravel
+```bash
+kool run setup
+```
+## 3. Start the Environment
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+After running the setup command, execute the following command to start the environment:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+kool start
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+This command initializes the necessary Docker containers and services for the development environment, ensuring everything is up and running. You should only need to run this command once after setting up the project. From there, you can begin development or interact with the application.
 
-## Laravel Sponsors
+# Assumptions
+The following assumptions have been made for this project:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **Currency and Language:** The system assumes there is only **one currency** and **one language** being used.
+- **Users:** There are no users configured in the system.
+- **Abandoned Shopping Carts:** Any abandoned shopping carts in the database should be wiped out by a job. For example, a cron job has to be set to run every two hours to remove carts that have not been updated in the last two hours.
 
-### Premium Partners
+## Framework Usage
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+In this project, I aimed to minimize reliance on the Laravel framework as much as possible. Instead of using Laravel's built-in Eloquent models, I created my own custom models to manage data and business logic independently.
 
-## Contributing
+However, I still leveraged Laravel for the following essential features:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **Routing**: Handled using Laravel’s built-in routing system to define API endpoints efficiently.
+- **Validation**: Used Laravel’s validation system to ensure incoming requests contain valid and properly formatted data.
+- **Dependency Injection**: Leveraged Laravel’s service container to manage dependencies and improve code maintainability.
+- **Query Builder**: Relied on Laravel’s Query Builder for database interactions instead of Eloquent ORM, ensuring flexibility and control over queries.
+- **API Response**: Used Laravel’s response helpers and exception handling to standardize API responses across the system.
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# API Documentation
 
-## Security Vulnerabilities
+## Cart Routes
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+The following API routes are available for managing shopping carts:
 
-## License
+### 1. **Get Cart**
+- **URL**: `/cart/{cartId}`
+- **Method**: `GET`
+- **Description**: Retrieves the details of a specific cart by its `cartId`.
+- **Response**: Returns the cart details, including the items in the cart, and the total cost or price.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### Example Request:
+```bash
+GET /cart/12345
+```
+Example Response:
+### Example Response:
+
+```json
+{
+  "message": "Cart has been retrieved successfully",
+  "data": {
+    "items": [
+      {
+        "id": 19,
+        "cart_id": 15,
+        "product_id": 1,
+        "quantity": 5,
+        "price_at_time": 1000,
+        "created_at": "2025-04-02 04:49:28",
+        "updated_at": "2025-04-02 04:49:28",
+        "product": {
+          "id": 1,
+          "name": "Red Widget",
+          "code": "R01",
+          "price": 1000,
+          "created_at": null,
+          "updated_at": null
+        },
+        "free_items": [5],
+        "discounts": [],
+        "final_item_quantity": 10,
+        "final_item_price": 1000
+      }
+    ],
+    "total_price": 1000,
+    "delivery_fees": 4950,
+    "total_cost": 5950
+  }
+}
+```
+### Explanation:
+
+- **message**: A user-friendly message indicating the success of the request (e.g., "Cart has been retrieved successfully").
+- **data**: The main data payload of the response.
+  - **items**: An array of items currently in the cart.
+    - **id**: Unique identifier for the cart item.
+    - **cart_id**: The ID of the cart to which the item belongs.
+    - **product_id**: The ID of the product added to the cart.
+    - **quantity**: The quantity of the item in the cart.
+    - **price_at_time**: The price of the product at the time it was added to the cart.
+    - **created_at**: Timestamp for when the item was added to the cart.
+    - **updated_at**: Timestamp for when the item was last updated in the cart.
+    - **product**: Product details of the item in the cart.
+      - **id**: Product ID.
+      - **name**: Product name.
+      - **code**: Product code or SKU.
+      - **price**: Product price.
+      - **created_at** & **updated_at**: Timestamps for when the product was created and last updated (null values may appear depending on the setup).
+    - **free_items**: An array of free items associated with this cart item.
+    - **discounts**: Array for any discounts applied to the item (empty if no discount).
+    - **final_item_quantity**: The final quantity of the item in the cart, including any adjustments (e.g., promotions or discounts).
+    - **final_item_price**: The final price of the item in the cart after any adjustments.
+  - **total_price**: The total price of all items in the cart (before any additional fees).
+  - **delivery_fees**: The delivery fees applied to the cart.
+  - **total_cost**: The total cost, including the price of items and delivery fees.
+
+
+### 2. **Add Item to Existing Cart**
+- **URL**: `/cart/{cartId}`
+- **Method**: `POST`
+- **Description**: Adds an item to an existing cart identified by `cartId`.
+- **Body**: Requires item details in the request body (productCode, quantity).
+- **Response**: Returns the updated cart details with the new item added.
+
+#### Example Request:
+```bash
+POST /cart/12345
+```
+
+### 3. **Create and Add Item to Cart**
+- **URL**: `/cart`
+- **Method**: `POST`
+- **Description**: Creates a new cart (if it doesn't exist) and adds an item to the cart.
+- **Body**: Requires item details in the request body (productCode, quantity).
+- **Response**: Returns the cart details with the new item added.
+
+#### Example Request:
+```bash
+POST /cart/12345
+```
