@@ -19,7 +19,8 @@ class CartController
     public function get(Request $request): JsonResponse
     {
         try {
-            $cartId = $request->route()->parameter('cartId');
+            // @phpstan-ignore-next-line
+            $cartId = $request->route()?->parameter('cartId');
             $data = $this->cartService->get($cartId);
 
             return response()->json([
@@ -43,6 +44,7 @@ class CartController
                 'quantity' => 'required|integer|min:1',
             ]);
 
+            // @phpstan-ignore-next-line
             $cartId = $request->route()->parameter('cartId');
             $data = $this->cartService->addItem($request, $cartId);
 

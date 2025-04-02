@@ -15,7 +15,7 @@ class BOGODiscountService implements DiscountStrategyInterface
         protected Discount $discount,
     ) {}
 
-    public function applyDiscount()
+    public function applyDiscount(): void
     {
         try {
             if ($this->cartItem->quantity >= $this->discount->min_quantity) {
@@ -32,7 +32,7 @@ class BOGODiscountService implements DiscountStrategyInterface
         }
     }
 
-    public function calculateDiscount()
+    public function calculateDiscount(): array
     {
         try {
             $freeItems = (int) floor($this->cartItem->quantity / $this->discount->min_quantity);

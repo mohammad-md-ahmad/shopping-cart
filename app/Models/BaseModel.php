@@ -17,7 +17,7 @@ class BaseModel
 
     protected stdClass $attributes;
 
-    public function __construct(array $data = [])
+    final public function __construct(array $data = [])
     {
         $this->table = $this->table ?? $this->generateTableName();
 
@@ -62,13 +62,7 @@ class BaseModel
 
     public function toArray(): array
     {
-        $data = [];
-
-        foreach ($this->attributes as $key => $value) {
-            $data[$key] = $value;
-        }
-
-        return $data;
+        return (array) $this->attributes;
     }
 
     protected function fillAttributes(array $data)

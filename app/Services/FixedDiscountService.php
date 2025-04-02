@@ -15,7 +15,7 @@ class FixedDiscountService implements DiscountStrategyInterface
         protected Discount $discount,
     ) {}
 
-    public function applyDiscount()
+    public function applyDiscount(): void
     {
         try {
             $appliedDiscountData = [
@@ -30,11 +30,13 @@ class FixedDiscountService implements DiscountStrategyInterface
         }
     }
 
-    public function calculateDiscount()
+    public function calculateDiscount(): array
     {
         try {
+            $discount = (int) $this->discount->value;
+
             return [
-                'discount' => (int) $this->discount->value,
+                'discount' => $discount,
             ];
         } catch (Exception $e) {
             throw $e;

@@ -15,7 +15,7 @@ class PercentageDiscountService implements DiscountStrategyInterface
         protected Discount $discount,
     ) {}
 
-    public function applyDiscount()
+    public function applyDiscount(): void
     {
         try {
             $appliedDiscountData = [
@@ -30,11 +30,11 @@ class PercentageDiscountService implements DiscountStrategyInterface
         }
     }
 
-    public function calculateDiscount()
+    public function calculateDiscount(): array
     {
         try {
             return [
-                'discount' => (int) ($this->cartItem->price_at_time * ($this->discount->value / 100)),
+                'discount' => (int) $this->cartItem->price_at_time * ($this->discount->value / 100),
             ];
         } catch (Exception $e) {
             throw $e;
