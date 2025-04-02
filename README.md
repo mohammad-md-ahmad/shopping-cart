@@ -145,3 +145,9 @@ POST /cart/12345
 ```bash
 POST /cart/12345
 ```
+# Unti Tests
+To run the unit tests, execute the following command:
+
+```bash
+kool run artisan test
+```
