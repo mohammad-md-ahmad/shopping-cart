@@ -3,6 +3,6 @@ parameters:
   treatPhpDocTypesAsCertain: false
   paths:
     - app
+    - tests
   ignoreErrors:
     - '#Dead catch \- Exception is never thrown in the try block\.#'
-
